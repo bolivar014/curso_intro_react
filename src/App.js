@@ -40,6 +40,29 @@ function App() {
   // Contar la longitud total de los todos
   const totalTodos = todos.length;
 
+  // Inicializamos var
+  let searchedTodos = [];
+
+  // Verificamos si existe algun filtro de busqueda
+  if(!searchValue.length >= 1) {
+    // Cuando no existe un filtro de busqueda
+    searchedTodos = todos;
+  } else {
+    // Cuando existe un filtro de busqueda
+
+    // Iteramos todos los todos existentes
+    searchedTodos = todos.filter(todo => {
+      // Convertimos todos los textos de los todos a minusculas
+      const todoText = todo.text.toLowerCase();
+
+      // Convertimos a minusculas el texto a buscar
+      const searchText = searchValue.toLowerCase();
+
+      // Validamos si lo que digitan en el input de buscar, coincide con algún todo
+      return todoText.includes(searchText);
+    });
+  }
+
   // Retornamos
   return (
     <React.Fragment>
@@ -54,7 +77,7 @@ function App() {
       />
       
       <TodoList>
-        {todos.map(todo => (
+        {searchedTodos.map(todo => (
           <TodoItem 
             key={todo.text} 
             text={todo.text}
