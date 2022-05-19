@@ -25,7 +25,22 @@ const defaultTodos = [
 ];
 
 function App() {
-  // Inicializamos Array's todos
+  // Inicializamos localStorage
+  const localStorageTODOS = localStorage.getItem('TODOS_V1');
+
+  // Inicializo variable
+  let parsedTodos;
+
+  if(!localStorageTODOS) {
+    // Cuando el localStorage no posee registros, inicializamos array vacio
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    // Cuando el localStorage ya posee registros
+    parsedTodos = JSON.parse(localStorageTODOS);
+  }
+
+  // Inicializamos Arrays todos
   const [todos, setTodos] = React.useState(defaultTodos);
 
   // Inicializamos estado de React | Funciona por medio de funciones
@@ -34,9 +49,6 @@ function App() {
   // Validamos cuantos todos estan completos - 2 opciones - Validamos todos que posición completed sean TRUE
   // const completedTodos = todos.filter(todo => todo.completed == true);
   const completedTodos = todos.filter(todo => !!todo.completed).length;
-
-  // Validamos Todos Incompletos
-  const deletedTodos = todos.filter(todo => !todo.completed).length;
 
   // Contar la longitud total de los todos
   const totalTodos = todos.length;
@@ -63,6 +75,18 @@ function App() {
       return todoText.includes(searchText);
     });
   }
+
+  // Creamos nuevo Todo en localStorge
+  const saveTodos = (newTodos) => {
+    // 
+    const stringifiedTodos = JSON.stringify(newTodos);
+
+    // Almacenamos
+    localStorage.setItem('TODOS_V1', stringifiedTodos);
+
+    // Recibimos nuevo Todo
+    setTodos(newTodos);
+  };
 
   // Marcar TODO's Completado
   const completeTodo = (text) => {
