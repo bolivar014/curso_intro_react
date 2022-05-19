@@ -1,10 +1,13 @@
 // Importamos libreria
 import React from 'react';
 
+// Importamos libreria CSS
+import './TodoSearch.css';
+
 // Creamos función TodoSearch
 function TodoSearch() {
     return (
-        <input placeholder="Cebolla"/>
+        <input className='TodoSearch' placeholder="Cebolla"/>
       
     );
 }
