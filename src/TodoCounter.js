@@ -4,10 +4,11 @@ import React from 'react';
 // Importamos libreria CSS
 import './TodoCounter.css';
 
-// Creamos función TodoCounter
-function TodoCounter() {
+// Creamos función TodoCounter || Recibimos argumentos desde App.js
+function TodoCounter({ total, completed }) {
+    
     return (
-        <h2 className='TodoCounter'>Has completado 2 de 3 TODO's</h2>
+        <h2 className='TodoCounter'>Has completado {completed} de {total} TODO's</h2>
 
     );
 }
