@@ -6,11 +6,6 @@ import './TodoItem.css';
 
 // Creamos función TodoItem
 function TodoItem(props) {
-    // Función que determina tareas completadas
-    const onComplete = () => {
-        alert('Ya completaste el todo ' + props.text);
-    };
-
     // Función que determina tareas incompletas
     const onDelete = () => {
         alert('Borraste el todo ' + props.text);
@@ -20,7 +15,7 @@ function TodoItem(props) {
         <li className='TodoItem'>
             <span 
                 className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-                onClick={onComplete}
+                onClick={props.onComplete}
             >√</span>
             <p className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}>
                 {props.text}
