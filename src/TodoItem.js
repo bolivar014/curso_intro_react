@@ -6,11 +6,7 @@ import './TodoItem.css';
 
 // Creamos función TodoItem
 function TodoItem(props) {
-    // Función que determina tareas incompletas
-    const onDelete = () => {
-        alert('Borraste el todo ' + props.text);
-    };
-
+    // Retornamos
     return (
         <li className='TodoItem'>
             <span 
@@ -22,7 +18,7 @@ function TodoItem(props) {
             </p>
             <span 
                 className="Icon Icon-delete"
-                onClick={onDelete}
+                onClick={props.onDelete}
             >X</span>
         </li>
     );

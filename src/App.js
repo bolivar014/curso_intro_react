@@ -64,21 +64,30 @@ function App() {
   }
 
   // Marcar TODO's Completado
-  const completeTodos = (text) => {
+  const completeTodo = (text) => {
     // Iteramos los TODOS, buscando con cual coincide el texto del click
     const todoIndex = todos.findIndex(todo => todo.text == text);
 
     // Creamos array "newTodos" como copia del anterior TODO en array "todos"
     const newTodos = [...todos];
-    
-    // Forma 1 de actualizar los TODO's
-    // todos[todoIndex] = {
-    //   text: todos[todoIndex].text,
-    //   completed: true,
-    // }
 
     // Forma 2 de actualizar los TODO's
     newTodos[todoIndex].completed = true;
+
+    // Sincronizamos la nueva lista con los cambios realizados
+    setTodos(newTodos);
+  };
+
+  // Marcar TODO's eliminados
+  const deleteTodo = (text) => {
+    // Iteramos los TODOS, buscando con cual coincide el texto del click
+    const todoIndex = todos.findIndex(todo => todo.text == text);
+
+    // Creamos array "newTodos" como copia del anterior TODO en array "todos"
+    const newTodos = [...todos];
+
+    // Eliminamos el todo
+    newTodos.splice(todoIndex, 1);
 
     // Sincronizamos la nueva lista con los cambios realizados
     setTodos(newTodos);
@@ -103,7 +112,8 @@ function App() {
             key={todo.text} 
             text={todo.text}
             completed={todo.completed}
-            onComplete={() => completeTodos(todo.text)}  
+            onComplete={() => completeTodo(todo.text)}  
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
